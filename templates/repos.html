@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+
+.button1 {
+    position:absolute;
+    transition: .5s ease;
+    left: 91.9%;
+    top: 2%;
+}
+
+.button2 {
+    position:absolute;
+    transition: .5s ease;
+    top:2%;
+    left: 85%;
+}
+
+.button3 {
+    position:absolute;
+    transition: .5s ease;
+    left: 80%;
+    top:2%;
+}
+
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  
+}
+
+.space{
+    width: 0;
+    height: 0; 
+    background-color: white;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+
+}
+
+.arrow-down {
+  width: 0; 
+  height:0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+<span>
+<form action="/repos" method="get">
+  <button type="submit" class="button1">Repos</button><br>
+</form>
+
+</span>
+<span>
+
+<form action="/developers" method="get">
+  <button type="submit" class="button2">Developers</button><br>
+</form>
+</span>
+<span>
+<form action="/teams" method="get">
+  <button type="submit" class="button3">Teams</button><br>
+</form>
+
+</span>
+
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th><a href="/repos?sort=+id"><div class="arrow-up"></div></a><span class="space"></span><a href="/repos?sort=-id"><span class="arrow-down"></span></a>Id</th>
+            <th><a href="/repos?sort=-name"><div class="arrow-up"></div></a><span class="space"></span><a href="/repos?sort=+name"><span class="arrow-down"></span></a> Nombre</th>
+            <th>Ambiente</th>
+            <th>Create Day</th>
+            <th>Update Day</th>
+            <th>Delete</th>
+            <th>Descripcion</th>
+            <th>Github Id</th>
+            <th>Observacion</th>
+            <th>Privado</th>
+
+        </tr>
+        
+        {% for repo in repos['repos'] %}
+        <tr>
+            <td>{{repo['id']}}</td>
+            <td><a href="/repos/{{repo['name']}}">{{repo['name'] }}</a></td>
+            <td>{{repo['ambiente']}}</td>
+            <td>{{repo['create_day']}}</td>
+            <td>{{repo['update_day']}}</td>
+            <td>{{repo['delete']}}</td>
+            <td>{{repo['description']}}</td>
+            <td>{{repo['github_id']}}</td>
+            <td>{{repo['observation']}}</td>
+            <td>{{repo['private']}}</td>
+        </tr>
+        {%endfor%}
+
+    </table>
+
+
+
+</body>
+</html>
